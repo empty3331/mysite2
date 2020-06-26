@@ -71,7 +71,48 @@ public class UserController extends HttpServlet {
 			session.invalidate();
 			
 			WebUtil.redirect(request, response, "/mysite2/main");
-		}
+		} else if("modifyForm".equals(action)) {
+			System.out.println("modifyForm");
+			HttpSession session = request.getSession();
+			//UserVo vo = (UserVo)session.getAttribute("authUser");
+			//vo.getNo();
+			int no = ((UserVo)session.getAttribute("authUser")).getNo();
+			
+			UserDao userDao = new UserDao();
+			UserVo vo =userDao.getUser(no);
+			System.out.println(vo.toString());
+			
+	
+			request.setAttribute("userVo", vo);
+			
+			WebUtil.forword(request, response, "/WEB-INF/views/user/modifyForm.jsp");
+			
+		} else if("modify".equals(action)) {
+			HttpSession session = request.getSession();
+			int no = ((UserVo)session.getAttribute("authUser")).getNo();
+			System.out.println(no);
+			
+			String password = request.getParameter("password");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
+			
+			UserVo vo = new UserVo(no,"",password,name,gender);//생성자 새로 안 넣고 값 넣어도 됨
+			System.out.println(vo.toString());
+			
+			UserDao userDao = new UserDao();
+			userDao.update(vo);
+			
+			//세션값 업데이트
+			//필요없는값도 같이 세션에 올라감
+			//session.setAttribute("authUser", vo);
+					
+			//세션에 이름만 수정하기
+			UserVo sVo = (UserVo)session.getAttribute("authUser");
+			sVo.setName(name);
+			
+			WebUtil.redirect(request, response, "/mysite2/main");
+			
+		} 
 
 	}
 

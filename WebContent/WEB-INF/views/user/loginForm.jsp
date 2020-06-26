@@ -20,17 +20,7 @@
 <body>
 	<div id="wrap">
 
-		<div id="header">
-			<h1>
-				<a href="">MySite</a>
-			</h1>
-
-			<ul>
-				<li><a href="/mysite2/user?action=loginForm">로그인</a></li>
-				<li><a href="/mysite2/user?action=joinForm">회원가입</a></li>
-			</ul>
-			
-		</div>
+		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		<!-- //header -->
 
 		<div id="nav">
@@ -44,14 +34,7 @@
 		</div>
 		<!-- //nav -->
 
-		<div id="aside">
-			<h2>회원</h2>
-			<ul>
-				<li>회원정보</li>
-				<li>로그인</li>
-				<li>회원가입</li>
-			</ul>
-		</div>
+		<jsp:include page="/WEB-INF/views/include/asideUser.jsp"></jsp:include>
 		<!-- //aside -->
 
 		<div id="content">
@@ -82,7 +65,7 @@
 						<!-- 비밀번호 -->
 						<div class="form-group">
 							<label class="form-text" for="input-pass">비밀번호</label> 
-							<input type="text" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요"	>
+							<input type="password" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요"	>
 						</div>
 						<%if("fail".equals(result)) {%>
 						<p>
@@ -103,9 +86,7 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 
-		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
-		</div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
 
 	</div>
