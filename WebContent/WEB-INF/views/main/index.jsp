@@ -42,7 +42,7 @@
 
 			<div id="index"> 
 			
-				<img id="profile-img" src="/mysite2/assets/image/profile.jpg">
+				<img id="profile-img" src="/mysite2/assets/image/pp.jpg">
 				
 				<div id="greetings">
 					<p class="text-xlarge">

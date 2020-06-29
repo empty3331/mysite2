@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.javaex.vo.GuestBookVo" %>
-<%@ page import="com.javaex.dao.GuestBookDao" %>
-<%@ page import="java.util.List" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%
-	GuestBookDao gbd = new GuestBookDao();
-	List<GuestBookVo> gbList = gbd.getGuestBookList();
-%>
+
 
 <!DOCTYPE html>
 <html>
@@ -21,7 +16,7 @@
 <body>
 
 	<div id="wrap">
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //header -->
 
 		<div id="nav">
@@ -89,9 +84,11 @@
 				</form>
 				
 
-				<%
-					for (GuestBookVo guest : gbList) {
-				%>
+				
+				<!--for (GuestBookVo guest : gbList) -->
+				
+				
+				<c:forEach items="${requestScope.guestBookList}" var="gbList" varStatus = "status">
 				<table class="guestRead">
 					<colgroup>
 						<col style="width: 10%;">
@@ -101,19 +98,19 @@
 					</colgroup>
 
 					<tr>
-						<td><%=guest.getNo()%></td>
-						<td><%=guest.getName()%></td>
-						<td><%=guest.getDate()%></td>
+						<td>${gbList.no }</td>
+						<td>${gbList.name }</td>
+						<td>${gbList.date }</td>
 						<td><a
-							href="/mysite2/gbc?no=<%=guest.getNo()%>&action=deleteform">삭제</a>
+							href="/mysite2/gbc?no=${gbList.no }&action=deleteform">삭제</a>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="4"><%= guest.getContent() %></td>
+						<td colspan="4">${gbList.content }</td>
 					</tr>
 				</table>
 				<br>
-				<%} %>
+				</c:forEach>
 
 
 			</div>
@@ -122,7 +119,7 @@
 		<!-- //content  -->
 
 
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->
 	
 </div>
