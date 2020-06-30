@@ -70,7 +70,9 @@
 								
 								<td>
 								
-								<a href="">[삭제]</a>
+								<c:if test="${sessionScope.authUser.no eq bList.userNo}">
+								<a href="/mysite2/board?action=writeForm">[삭제]</a>
+								</c:if>
 								
 								</td>
 								
