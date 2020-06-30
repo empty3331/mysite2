@@ -69,9 +69,9 @@
 								<td>${bList.regDate }</td>
 								
 								<td>
-								<c:if test="${sessionScope.authUser.no eq bList.userNo}">
+								
 								<a href="">[삭제]</a>
-								</c:if>
+								
 								</td>
 								
 							</tr>

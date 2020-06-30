@@ -48,6 +48,13 @@ public class BoardController extends HttpServlet {
 			
             
 			WebUtil.forword(request, response, "/WEB-INF/views/board/read.jsp");
+		} else if("writeForm".equals(action)) {
+			System.out.println("글쓰기");
+			WebUtil.forword(request, response, "/WEB-INF/views/board/writeForm.jsp");
+			
+		} else if("insert".equals(action)) {
+			System.out.println("글 등록");
+			
 			
 		}
 		
