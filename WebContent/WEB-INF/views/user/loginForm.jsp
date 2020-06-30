@@ -2,13 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<%
-
-	String result= request.getParameter("result");
-
-%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,15 +17,7 @@
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //header -->
 
-		<div id="nav">
-			<ul>
-				<li><a href="">방명록</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">입사지원서</a></li>
-			</ul>
-			<div class="clear"></div>
-		</div>
+		<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
 		<!-- //nav -->
 
 		<c:import url="/WEB-INF/views/include/asideUser.jsp"></c:import>
@@ -68,16 +53,19 @@
 							<label class="form-text" for="input-pass">비밀번호</label> 
 							<input type="password" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요"	>
 						</div>
-						<%if("fail".equals(result)) {%>
+						
+						<!-- if("fail".equals(result)) {%> -->
+						<c:if test="${param.result eq 'fail' }">
 						<p>
 						   로그인에 실패했습니다.다시 시도하십시오.
 						</p>
-						<%} %>
+						</c:if>
+						
 						<!-- 버튼영역 -->
 		                <div class="button-area">
 		                    <button type="submit" id="btn-submit">로그인</button>
 		                </div>
-						<input type="text" name="action" value="login">
+						<input type="hidden" name="action" value="login">
 					</form>
 				</div>
 				<!-- //loginForm -->
