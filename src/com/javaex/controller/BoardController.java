@@ -52,9 +52,17 @@ public class BoardController extends HttpServlet {
 			System.out.println("글쓰기");
 			WebUtil.forword(request, response, "/WEB-INF/views/board/writeForm.jsp");
 			
-		} else if("insert".equals(action)) {
+		} else if("write".equals(action)) {
 			System.out.println("글 등록");
 			
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			int userNo = Integer.parseInt(request.getParameter("user_no"));
+			
+			BoardVo bVo = new BoardVo(title,content,userNo);
+			bDao.boardInsert(bVo);
+			
+			WebUtil.redirect(request, response, "/mysite2/board?action=list");
 			
 		}
 		
