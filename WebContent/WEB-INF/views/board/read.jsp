@@ -74,7 +74,9 @@
 							</span>
 						</div>
 						
-						<a id="btn_modify" href="/mysite2/board?action=modifyForm">수정</a>
+						<c:if test="${sessionScope.authUser.no eq requestScope.readVo.userNo }">
+						<a id="btn_modify" href="/mysite2/board?no=${requestScope.readVo.no}&action=modifyForm">수정</a>
+						</c:if>
 						
 						<a id="btn_modify" href="/mysite2/board?action=list">목록</a>
 						<input type = "hidden" name="no" value="${requestScope.readVo.no }">

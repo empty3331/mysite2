@@ -196,5 +196,30 @@ public class BoardDao {
 		close();
 	}
 	
+	//게시물 수정
+	public void boardUpdate(int no, String title, String content) {
+		getConnection();
+		try {
+			String query = "";
+			query += " update board ";
+			query += " set title = ?,";
+			query += "     content   = ? ";
+			query += " where no = ? ";
+			
+			pstmt = conn.prepareStatement(query); 
+			
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, no);
+			
+			pstmt.executeUpdate();
+		}
+		catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+		
+	}
+	
 
 }

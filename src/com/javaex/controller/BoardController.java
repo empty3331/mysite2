@@ -22,7 +22,7 @@ public class BoardController extends HttpServlet {
 		System.out.println("board");
 		
 		BoardDao bDao = new BoardDao();
-		
+		int no;
 		
 		String action = request.getParameter("action");
 		
@@ -40,7 +40,7 @@ public class BoardController extends HttpServlet {
 		} else if("read".equals(action)) {
 			System.out.println("읽어오기");
 			
-			int no = Integer.parseInt(request.getParameter("no"));
+			no = Integer.parseInt(request.getParameter("no"));
 			BoardVo bVo = bDao.getBoard(no);
 			
 			//리퀘스트에 게시글 정보 넣기
@@ -50,7 +50,7 @@ public class BoardController extends HttpServlet {
 			WebUtil.forword(request, response, "/WEB-INF/views/board/read.jsp");
 		} else if("writeForm".equals(action)) {
 			System.out.println("글쓰기");
-			WebUtil.forword(request, response, "/WEB-INF/views/board/writeForm.jsp");
+			WebUtil.forword(request, response,"/WEB-INF/views/board/writeForm.jsp");
 			
 		} else if("write".equals(action)) {
 			System.out.println("글 등록");
@@ -67,19 +67,34 @@ public class BoardController extends HttpServlet {
 		} else if("delete".equals(action)) {
 			System.out.println("삭제");
 			
-			int no = Integer.parseInt(request.getParameter("no"));
+			no = Integer.parseInt(request.getParameter("no"));
 			bDao.boardDelete(no);
 			
 			WebUtil.redirect(request, response, "/mysite2/board?action=list");
 		} else if("modifyForm".equals(action)) {
+			System.out.println("수정폼");
 			
+			no = Integer.parseInt(request.getParameter("no"));
+			BoardVo bVo = bDao.getBoard(no);
+			
+			//리퀘스트에 게시글 정보 넣기
+			request.setAttribute("modifyVo", bVo);
+            
+			WebUtil.forword(request, response,"/WEB-INF/views/board/modifyForm.jsp");
+		} else if("modify".equals(action)) {
+			
+			int listNo = Integer.parseInt(request.getParameter("no"));
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			
+			bDao.boardUpdate(listNo, title, content);
+			
+			WebUtil.redirect(request, response, "/mysite2/board?action=list");
 			
 		}
 		
 	}
 	
-	
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
