@@ -19,12 +19,13 @@ public class BoardVo {
 		this.userNo = userNo;
 	}
 	
-	public BoardVo(int no, String title, String name, int hit, String regDate) {
+	public BoardVo(int no, String title, String name, int hit, String regDate,int userNo) {
 		this.no = no;
 		this.title = title;
 		this.name = name;
 		this.hit = hit;
 		this.regDate = regDate;	
+		this.userNo = userNo;
 	}
 	public BoardVo(int no, String name,  int hit,String regDate,String title,String content,int userNo) {
 		this.no = no;

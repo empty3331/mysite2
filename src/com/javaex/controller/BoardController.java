@@ -64,6 +64,16 @@ public class BoardController extends HttpServlet {
 			
 			WebUtil.redirect(request, response, "/mysite2/board?action=list");
 			
+		} else if("delete".equals(action)) {
+			System.out.println("삭제");
+			
+			int no = Integer.parseInt(request.getParameter("no"));
+			bDao.boardDelete(no);
+			
+			WebUtil.redirect(request, response, "/mysite2/board?action=list");
+		} else if("modifyForm".equals(action)) {
+			
+			
 		}
 		
 	}

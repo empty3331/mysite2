@@ -70,8 +70,8 @@
 								
 								<td>
 								
-								<c:if test="${sessionScope.authUser.no eq bList.userNo}">
-								<a href="/mysite2/board?action=writeForm">[삭제]</a>
+								<c:if test="${sessionScope.authUser.no == bList.userNo }">
+								<a href="/mysite2/board?no=${bList.no}&action=delete">[삭제]</a>
 								</c:if>
 								
 								</td>

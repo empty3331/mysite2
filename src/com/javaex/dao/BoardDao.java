@@ -95,7 +95,8 @@ public class BoardDao {
 			query += "        b.title,";
 			query += "        u.name,";
 			query += "        b.hit,";
-			query += "        to_char(b.reg_date, 'yyyy-mm-dd') reg_date";
+			query += "        to_char(b.reg_date, 'yyyy-mm-dd') reg_date,";
+			query += "       b.user_no";
 			query += " FROM board b, users u";
 			query += " WHERE b.user_no = u.no";
 			
@@ -117,8 +118,9 @@ public class BoardDao {
 				String name = rs.getString("name");
 				int hit = rs.getInt("hit");
 				String regDate = rs.getString("reg_date");
+				int userNo = rs.getInt("user_no");
 				
-				BoardVo boardVo = new BoardVo(no,title,name,hit,regDate);
+				BoardVo boardVo = new BoardVo(no,title,name,hit,regDate,userNo);
 				boardList.add(boardVo);
 			}
 			
@@ -173,6 +175,25 @@ public class BoardDao {
 		}
 		close();
 		return bVo;
+	}
+	
+	//게시물 삭제
+	public void boardDelete(int no) {
+		getConnection();
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			String query = ""; // 쿼리문 문자열만들기, ? 주의
+			query += " delete from board ";
+			query += " where no = ? ";
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+			
+			pstmt.setInt(1, no);// ?(물음표) 중 1번째, 순서중요
+			
+			pstmt.executeUpdate(); 
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
 	}
 	
 

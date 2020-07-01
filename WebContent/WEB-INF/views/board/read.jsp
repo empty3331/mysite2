@@ -74,7 +74,7 @@
 							</span>
 						</div>
 						
-						<a id="btn_modify" href="">수정</a>
+						<a id="btn_modify" href="/mysite2/board?action=modifyForm">수정</a>
 						
 						<a id="btn_modify" href="/mysite2/board?action=list">목록</a>
 						<input type = "hidden" name="no" value="${requestScope.readVo.no }">
