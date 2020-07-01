@@ -91,6 +91,18 @@ public class BoardController extends HttpServlet {
 			
 			WebUtil.redirect(request, response, "/mysite2/board?action=list");
 			
+		} else if("search".equals(action)) {
+			System.out.println("검색");
+			String keyword = request.getParameter("keyword");
+			List<BoardVo> bList = bDao.boardList(keyword);
+			
+			request.setAttribute("bList", bList);
+
+			// forword 하는 방법
+			WebUtil.forword(request, response, "/WEB-INF/views/board/list.jsp");
+			
+			System.out.println(bList.toString());
+
 		}
 		
 	}
