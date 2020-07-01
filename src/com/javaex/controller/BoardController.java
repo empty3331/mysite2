@@ -41,6 +41,7 @@ public class BoardController extends HttpServlet {
 			System.out.println("읽어오기");
 			
 			no = Integer.parseInt(request.getParameter("no"));
+			bDao.hitUp(no);
 			BoardVo bVo = bDao.getBoard(no);
 			
 			//리퀘스트에 게시글 정보 넣기

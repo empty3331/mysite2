@@ -221,5 +221,27 @@ public class BoardDao {
 		
 	}
 	
+	//조회수 상승
+	public void hitUp(int no) {
+		getConnection();
+		
+		try {
+			String query = "";
+			query += " update board ";
+			query += " set hit= hit+1";
+			query += " where no = ? ";
+			
+			pstmt = conn.prepareStatement(query); 
+			
+			pstmt.setInt(1, no);
+			
+			pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+	}
+	
 
 }
